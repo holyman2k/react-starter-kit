@@ -19,14 +19,14 @@ React Starter Kit is a Project scaffolding to start a empty React Project.  It c
 git clone https://github.com/holyman2k/react-starter-kit.git 
 ```
 
-# run
+# Run
 
 ```
 npm install
 npm start
 ```
 
-# deplay
+# Deplay
 
 ```
 npm run package
