@@ -17,7 +17,6 @@ const Nav = ({}) => {
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="/Charlie Wu">Me</Link></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
