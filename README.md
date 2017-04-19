@@ -1,2 +1,35 @@
 # react-starter-kit
-React, Redux, React Router, Bootstrap, Less, Busy Indicator, Webpack, ExtractPlugin
+
+React Starter Kit is a Project scaffolding to start a empty React Project.  It contains the following components
+
+* React
+* React Redux
+* React Router,
+* React Redux Router, 
+* Bootstrap
+* Bootswatch (Cosmo be default, because I like it)
+* Less
+* Busy Indicator
+* Webpack
+* ExtractPlugin (Extract css into separate file)
+
+# Install
+
+```
+git clone https://github.com/holyman2k/react-starter-kit.git 
+```
+
+# run
+
+```
+npm install
+npm start
+```
+
+# deplay
+
+```
+npm run package
+```
+
+The files will be in **Build** folder
