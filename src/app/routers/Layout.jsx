@@ -4,23 +4,25 @@ import { withRouter } from 'react-router-dom'
 import Loader from "react-loader-advanced";
 import NavBar from "../components/NavBar.jsx"
 import Spinner from "../components/Spinner.jsx"
+import Busy from "../components/Busy.jsx"
 
-const Layout = ({ children, isBusy=false }) => {
+const Layout = ({ children }) => {
 
     return (
-        <Loader show={isBusy} message={<Spinner />}>
+        <div>
             <NavBar />
             <div class="container">
                 {children}
             </div>
-        </Loader>
+            <Busy />
+        </div>
     )
 }
 
 export default withRouter(connect(
     (store) => {
         return {
-            isBusy: false,
+            // isBusy: store.busy.busy,
         }
     }
 )(Layout));

@@ -15,6 +15,7 @@ const App = () => {
             <HashRouter history={history}>
                 <Layout>
                     <Route exact path="/" component={Home} />
+                    <Route exact path="/:greeting" component={Home} />
                 </Layout>
             </HashRouter>
         </Provider>

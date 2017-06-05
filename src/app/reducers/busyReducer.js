@@ -1,15 +1,15 @@
 import clone from "clone";
 
 const initialState = {
-    greeting: "Welcome",
+    busy: false,
 };
 
 export default function (state = initialState, action) {
     const { type, payload } = action;
     switch (type) {
-        case "WELCOME": {
+        case "BUSY": {
             const newState = clone(state);
-            newState.greeting = `Welcome ${payload} `;
+            newState.busy = payload;
             return newState;
         }
     }
