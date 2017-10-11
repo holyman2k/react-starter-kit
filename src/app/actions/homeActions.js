@@ -9,10 +9,10 @@ export function welcome(greeting) {
     }
 }
 
-export function presentModal(show = true) {
+export function modalAction(open = true) {
 
     return {
-        type: "HOME_PRESENT_MODAL",
-        payload: show,
+        type: "HOME_MODAL_ACTION",
+        payload: open,
     }
 }

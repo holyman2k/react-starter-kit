@@ -3,18 +3,16 @@ import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 import Loader from "react-loader-advanced";
 import NavBar from "../components/NavBar.jsx"
-import Spinner from "../components/Spinner.jsx"
-import Busy from "../components/Busy.jsx"
+import { Container, Divider, Dropdown, Grid, Header, Image, List, Menu, Segment } from 'semantic-ui-react'
 
 const Layout = ({ children }) => {
 
     return (
         <div>
             <NavBar />
-            <div class="container">
+            <Container text style={{ marginTop: '4em' }}>
                 {children}
-            </div>
-            <Busy />
+            </Container>
         </div>
     )
 }

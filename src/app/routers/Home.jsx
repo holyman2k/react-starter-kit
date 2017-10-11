@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom"
-import { welcome } from "../actions/homeActions";
+import { welcome, modalAction } from "../actions/homeActions";
+import { Button, Header, Image, Modal } from 'semantic-ui-react'
 
-const Home = ({ greeting}) => {
+
+const Home = ({ greeting, openModal, modalClick }) => {
     return (
         <div>
             <h1>{greeting}</h1>
@@ -17,6 +19,28 @@ const Home = ({ greeting}) => {
             </p>
 
             <Link to="/Ni Hao" class="btn btn-primary">Ni Hao</Link>
+
+            <br />
+
+            <a href="#" onClick={e => modalClick(e, true)}>Modal</a>
+
+            <Modal
+                size="mini"
+                open={openModal}
+                closeOnEscape={true}
+                closeOnRootNodeClick={false}
+                onClose={e => modalClick(e, false)}>
+                <Modal.Header>
+                    Delete Your Account
+                </Modal.Header>
+                    <Modal.Content>
+                        <p>Are you sure you want to delete your account</p>
+                    </Modal.Content>
+                    <Modal.Actions>
+                        <Button negative onClick={e => modalClick(e, false)}>No</Button>
+                        <Button positive onClick={e => modalClick(e, false)}>Yes</Button>
+                    </Modal.Actions>
+                </Modal>
         </div>
     )
 }
@@ -24,7 +48,8 @@ const Home = ({ greeting}) => {
 export default withRouter(connect(
     (store, props) => {
         return {
-            greeting: store.home.greeting || ""
+            greeting: store.home.greeting,
+            openModal: store.home.openModal || false,
         }
     },
     (dispatch, props) => {
@@ -33,6 +58,13 @@ export default withRouter(connect(
         }, 0);
         return {
             dispatch,
+            modalClick: (e, open) => {
+                if (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                dispatch(modalAction(open));
+            }
         }
     }
 )(Home));

@@ -1,36 +1,37 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { Container, Divider, Dropdown, Menu } from "semantic-ui-react"
 
 const Nav = ({}) => {
     return (
-        <nav class="navbar navbar-default">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <Link to="/" class="navbar-brand">React</Link>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><Link to="/">Home</Link></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                Welcome! <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><Link to="/">Log out</Link></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <Menu inverted>
+            <Container class="nav-bar">
+                <Menu.Item as="a" header class="logo-text">
+                    React
+                </Menu.Item>
+                <Menu.Item as="a">Home</Menu.Item>
+
+                <Menu.Menu position="right">
+                    <Dropdown item simple text="Dropdown">
+                        <Dropdown.Menu>
+                            <Dropdown.Item>List Item</Dropdown.Item>
+                            <Dropdown.Item>List Item</Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Header>Header Item</Dropdown.Header>
+                            <Dropdown.Item>
+                                <i class="dropdown icon" />
+                                <span class="text">Submenu</span>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item>List Item</Dropdown.Item>
+                                    <Dropdown.Item>List Item</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown.Item>
+                            <Dropdown.Item>List Item</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </Menu.Menu>
+            </Container>
+        </Menu>
     );
 };
 

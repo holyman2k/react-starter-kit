@@ -37,6 +37,10 @@ module.exports = {
                 use: "file-loader?name=font/[name].[ext]",
             },
             {
+                test: /\.(png|gif|jpg)$/,
+                use: "file-loader?name=images/[name].[ext]",
+            },
+            {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({ loader: "css-loader", publicPath: "../" }),
             },

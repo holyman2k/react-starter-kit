@@ -2,7 +2,7 @@ import clone from "clone";
 
 const initialState = {
     greeting: "Welcome",
-    showModal: false,
+    openModal: false,
 };
 
 export default function (state = initialState, action) {
@@ -10,7 +10,12 @@ export default function (state = initialState, action) {
     switch (type) {
         case "WELCOME": {
             const newState = clone(state);
-            newState.greeting = true;
+            newState.greeting = payload;
+            return newState;
+        }
+        case "HOME_MODAL_ACTION": {
+            const newState = clone(state);
+            newState.openModal = payload;
             return newState;
         }
     }

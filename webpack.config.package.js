@@ -35,6 +35,10 @@ module.exports = {
                 use: 'file-loader?name=../fonts/[name].[ext]',
             },
             {
+                test: /\.(png|gif|jpg)$/,
+                use: "file-loader?name=images/[name].[ext]",
+            },
+            {
                 test: /\.less$/,
                 use: ExtractTextPlugin.extract(['css-loader', 'less-loader']),
             },
