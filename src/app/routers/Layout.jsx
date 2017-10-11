@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import { withRouter } from 'react-router-dom'
+import { withRouter } from "react-router-dom"
 import Loader from "react-loader-advanced";
 import NavBar from "../components/NavBar.jsx"
 import Spinner from "../components/Spinner.jsx"

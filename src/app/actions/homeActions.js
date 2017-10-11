@@ -7,5 +7,12 @@ export function welcome(greeting) {
             dispatch({ type: "BUSY", payload: false });
         }, 500);
     }
+}
 
+export function presentModal(show = true) {
+
+    return {
+        type: "HOME_PRESENT_MODAL",
+        payload: show,
+    }
 }
