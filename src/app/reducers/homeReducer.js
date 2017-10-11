@@ -13,11 +13,6 @@ export default function (state = initialState, action) {
             newState.greeting = true;
             return newState;
         }
-        case "HOME_PRESENT_MODAL": {
-            const newState = clone(state);
-            newState.showModal = payload;
-            return newState;
-        }
     }
     return state;
 }

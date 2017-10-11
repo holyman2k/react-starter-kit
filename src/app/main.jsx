@@ -1,5 +1,3 @@
-require("jquery");
-require("bootstrap");
 require("./css/main.less");
 
 import React from "react"

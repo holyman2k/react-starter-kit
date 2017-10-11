@@ -1,10 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom"
-import { welcome, presentModal } from "../actions/homeActions";
-import Modal from "../components/Modal.jsx"
+import { welcome } from "../actions/homeActions";
 
-const Home = ({ greeting, showModal, onPresentModal }) => {
+const Home = ({ greeting}) => {
     return (
         <div>
             <h1>{greeting}</h1>
@@ -18,12 +17,6 @@ const Home = ({ greeting, showModal, onPresentModal }) => {
             </p>
 
             <Link to="/Ni Hao" class="btn btn-primary">Ni Hao</Link>
-
-            <button class="btn btn-info" onClick={() => onPresentModal(true)}>Modal</button>
-
-            <Modal show={showModal} title="Modal" onCancel={() => onPresentModal(false)} onAction={() => onPresentModal(false)} >
-                <h1>Hello world</h1>
-            </Modal>
         </div>
     )
 }
@@ -31,8 +24,7 @@ const Home = ({ greeting, showModal, onPresentModal }) => {
 export default withRouter(connect(
     (store, props) => {
         return {
-            greeting: store.home.greeting || "",
-            showModal: store.home.showModal,
+            greeting: store.home.greeting || ""
         }
     },
     (dispatch, props) => {
@@ -41,9 +33,6 @@ export default withRouter(connect(
         }, 0);
         return {
             dispatch,
-            onPresentModal: (show) => {
-                dispatch(presentModal(show));
-            },
         }
     }
 )(Home));
