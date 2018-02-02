@@ -21,7 +21,7 @@ const Home = ({ greeting, showModal, onPresentModal }) => {
 
             <button class="btn btn-info" onClick={() => onPresentModal(true)}>Modal</button>
 
-            <Modal show={showModal} title="Modal" onCancel={() => onPresentModal(false)} onAction={() => onPresentModal(false)} >
+            <Modal show={showModal} title="Alert" onCancel={() => onPresentModal(false)} onAction={() => onPresentModal(false)} >
                 <h1>Hello world</h1>
             </Modal>
         </div>

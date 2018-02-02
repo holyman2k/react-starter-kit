@@ -1,33 +1,31 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-const Nav = ({}) => {
+const Nav = ({ }) => {
     return (
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <Link to="/" class="navbar-brand">React</Link>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><Link to="/">Home</Link></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                Welcome! <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><Link to="/">Log out</Link></li>
-                            </ul>
+                <a class="navbar-brand" href="#">React</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
                         </li>
                     </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Welcome! </a>
+                            <div class="dropdown-menu" aria-labelledby="navbar-dropdown">
+                                <a class="dropdown-item" href="#">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+
                 </div>
             </div>
         </nav>

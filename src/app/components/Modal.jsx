@@ -27,9 +27,9 @@ class Modal extends React.Component {
     }
 
     componentWillReceiveProps(props) {
-        const {show} = props;
+        const { show } = props;
         const modal = ReactDOM.findDOMNode(this);
-        const isVisible = $(modal).hasClass("in");
+        const isVisible = $(modal).css("display") == "block";
         if (show && !isVisible) {
             let options = {
                 backdrop: "static",
@@ -48,36 +48,61 @@ class Modal extends React.Component {
     }
 
     render() {
-        const {show, children, title, onAction, actionButtonTitle = "OK", actionButtonClass = "btn-primary", closeButtonTitle = "Cancel", showButtons = true, size = "large"} = this.props;
+        const { show, children, title, onAction, actionButtonTitle = "OK", actionButtonClass = "btn-primary", closeButtonTitle = "Cancel", showButtons = true, size = "large" } = this.props;
         const sizeClass = size == "large" ? "modal-lg" : size == "small" ? "modal-sm" : "";
         return (
-            <div class="modal fade" data-backdrop="static" tabIndex="-1" role="dialog">
-                {!show ||
+            <div class="modal" tabIndex="-1" role="dialog">
                 <div class={`modal-dialog ${sizeClass}`} role="document">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <h5 class="modal-title">{title}</h5>
                             <button type="button" class="close" onClick={this.cancel.bind(this)} aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h4 class="modal-title"><b>{title}</b></h4>
                         </div>
                         <div class="modal-body">
                             {children}
                         </div>
                         {!showButtons ||
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" onClick={this.cancel.bind(this)}>
-                                {closeButtonTitle}
-                            </button>
-                            <button type="button" class={"btn " + actionButtonClass} onClick={onAction}>
-                                {actionButtonTitle}
-                            </button>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" onClick={this.cancel.bind(this)}>
+                                    {closeButtonTitle}
+                                </button>
+                                <button type="button" class={"btn " + actionButtonClass} onClick={onAction}>
+                                    {actionButtonTitle}
+                                </button>
+                            </div>
                         }
                     </div>
                 </div>
-                }
             </div>
+            // <div class="modal fade" data-backdrop="static" tabIndex="-1" role="dialog">
+            //     {!show ||
+            //     <div class={`modal-dialog ${sizeClass}`} role="document">
+            //         <div class="modal-content">
+            //             <div class="modal-header">
+            //                 <button type="button" class="close" onClick={this.cancel.bind(this)} aria-label="Close">
+            //                     <span aria-hidden="true">&times;</span>
+            //                 </button>
+            //                 <h4 class="modal-title"><b>{title}</b></h4>
+            //             </div>
+            //             <div class="modal-body">
+            //                 {children}
+            //             </div>
+            // {!showButtons ||
+            // <div class="modal-footer">
+            //     <button type="button" class="btn btn-default" onClick={this.cancel.bind(this)}>
+            //         {closeButtonTitle}
+            //     </button>
+            //     <button type="button" class={"btn " + actionButtonClass} onClick={onAction}>
+            //         {actionButtonTitle}
+            //     </button>
+            // </div>
+            // }
+            //         </div>
+            //     </div>
+            //     }
+            // </div>
         )
     }
 }
