@@ -1,7 +1,6 @@
 require("jquery");
 require("bootstrap");
-// require("./css/main.less");
-require("bootstrap/dist/css/bootstrap.min.css");
+require ("./css/main.scss");
 
 import React from "react"
 import { render } from "react-dom"

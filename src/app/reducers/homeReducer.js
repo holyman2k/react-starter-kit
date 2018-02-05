@@ -10,7 +10,7 @@ export default function (state = initialState, action) {
     switch (type) {
         case "WELCOME": {
             const newState = clone(state);
-            newState.greeting = true;
+            newState.greeting = payload;
             return newState;
         }
         case "HOME_PRESENT_MODAL": {
