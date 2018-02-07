@@ -13,30 +13,45 @@ module.exports = {
     devtool: false,
     entry: './app/main.jsx',
 
+
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
-                    loader: 'babel-loader',
+                    loader: "babel-loader",
                     query: {
-                        presets: ['react', "stage-0", 'es2015'],
-                        plugins: ['react-html-attrs'],
+                        presets: ["react", "stage-0", "es2015"],
+                        plugins: ["react-html-attrs"],
                     },
                 },
             },
             {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract('css-loader'),
-            },
-            {
                 test: /\.(eot|ttf|woff2|woff|svg)$/,
-                use: 'file-loader?name=../fonts/[name].[ext]',
+                use: "file-loader?name=font/[name].[ext]",
             },
             {
-                test: /\.less$/,
-                use: ExtractTextPlugin.extract(['css-loader', 'less-loader']),
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({ use: "css-loader", publicPath: "../" }),
+            },
+            {
+                test: /\.(scss)$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        "css-loader", // translates CSS into CommonJS modules
+                        {
+                            loader: "postcss-loader", // Run post css actions
+                            options: {
+                                options: {
+                                    plugins: () => [require("precss"), require("autoprefixer")]
+                                },
+                            }
+                        },
+                        "sass-loader" // compiles Sass to CSS
+                    ]
+                }),
             },
         ]
     },
@@ -64,7 +79,21 @@ module.exports = {
         new CopyWebpackPlugin([
             { from: 'index.html', to: '../index.html' },
         ]),
-        new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+        new webpack.optimize.UglifyJsPlugin({
+            output: { comments: false },
+            compress: {
+                sequences: true,
+                dead_code: true,
+                conditionals: true,
+                booleans: true,
+                unused: true,
+                if_return: true,
+                join_vars: true,
+                drop_console: true
+            },
+            mangle: false,
+            sourcemap: false,
+        }),
         new ExtractTextPlugin('../css/style.css'),
     ],
 };

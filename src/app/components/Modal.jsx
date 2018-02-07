@@ -10,12 +10,6 @@ class Modal extends React.Component {
         $(modal).on("hidden.bs.modal", function () {
             props.onCancel();
         });
-        // auto focus on modal 
-        $(modal).on("show.bs.modal", function () {
-            setTimeout(() => {
-                $(modal).focus()
-            }, 200);
-        });
     }
 
     componentWillUnmount() {
@@ -29,18 +23,19 @@ class Modal extends React.Component {
     componentWillReceiveProps(props) {
         const { show } = props;
         const modal = ReactDOM.findDOMNode(this);
-        const isVisible = $(modal).css("display") == "block";
-        if (show && !isVisible) {
+        const isHidden = $(modal).css("display") != "block";
+        if (show && isHidden) {
             let options = {
                 backdrop: "static",
-                keyboard: true
+                keyboard: true,
+                focus: true,
+                show: true,
             };
             $(modal).modal(options);
-        } else if (!show && isVisible) {
+        } else if (!show && !isHidden) {
             $(modal).modal("hide");
         }
     }
-
     cancel() {
         let modal = ReactDOM.findDOMNode(this);
         $(modal).modal(modal, "hide");
@@ -48,10 +43,14 @@ class Modal extends React.Component {
     }
 
     render() {
-        const { show, children, title, onAction, actionButtonTitle = "OK", actionButtonClass = "btn-primary", closeButtonTitle = "Cancel", showButtons = true, size = "large" } = this.props;
+        const { show, children, title, onAction, actionButtonTitle = "OK", closeButtonTitle = "Cancel", actionButtonClass = "btn-primary", showButtons = true, size = "large" } = this.props;
         const sizeClass = size == "large" ? "modal-lg" : size == "small" ? "modal-sm" : "";
+        console.log(children)
+        if (Array.isArray(children)) {
+
+        }
         return (
-            <div class="modal" tabIndex="-1" role="dialog">
+            <div class="modal fade" tabIndex="-1" role="dialog">
                 <div class={`modal-dialog ${sizeClass}`} role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -63,7 +62,7 @@ class Modal extends React.Component {
                         <div class="modal-body">
                             {children}
                         </div>
-                        {!showButtons ||
+                        {showButtons &&
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" onClick={this.cancel.bind(this)}>
                                     {closeButtonTitle}
