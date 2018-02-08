@@ -80,7 +80,6 @@ export const Body = ({ children }) => {
     return children;
 }
 
-
 export const Footer = ({ children }) => {
     return children;
 }
@@ -99,11 +98,12 @@ export const Confirm = ({ show, children, title, onCancel, onAction }) => {
 }
 
 export const Alert = ({ show, children, title, onClose }) => {
+    const style = { width: 70 }
     return (
         <Modal show={show} title={title} onCancel={onClose}>
             <Body>{children}</Body>
             <Footer>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                <button style={style} type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
             </Footer>
         </Modal>
     )

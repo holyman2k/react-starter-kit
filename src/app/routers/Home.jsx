@@ -20,21 +20,18 @@ const Home = ({ greeting, showModal, onPresentModal }) => {
 
             {/* <Modal show={showModal} title="Alert" onCancel={() => onPresentModal(false)} onAction={() => onPresentModal(false)}>
                 <Body>
-                    <h1>Hello world</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut malesuada sem eu rutrum pharetra. Aliquam aliquam, ex in aliquet gravida, sapien erat lobortis enim, ac blandit nisi risus non nibh. Suspendisse mauris ipsum, convallis vitae rutrum nec, vehicula eget ligula. Nulla congue condimentum vehicula. Etiam pellentesque interdum neque nec aliquet </p>
                 </Body>
                 <Footer>
                     <button type="button" class="btn btn-secondary" onClick={() => onPresentModal(false)}>Close</button>
                 </Footer>
             </Modal> */}
-            {/* <Alert show={showModal} title="Alert" onClose={() => onPresentModal(false)}>
-                <h1>Hello world</h1>
+            <Alert show={showModal} title="Alert" onClose={() => onPresentModal(false)}>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut malesuada sem eu rutrum pharetra. Aliquam aliquam, ex in aliquet gravida, sapien erat lobortis enim, ac blandit nisi risus non nibh. Suspendisse mauris ipsum, convallis vitae rutrum nec, vehicula eget ligula. Nulla congue condimentum vehicula. Etiam pellentesque interdum neque nec aliquet </p>
-            </Alert> */}
-            <Confirm show={showModal} title="Alert" onCancel={() => onPresentModal(false)} onAction={() => onPresentModal(false)}>
-                    <h1>Hello world</h1>
+            </Alert>
+            {/* <Confirm show={showModal} title="Alert" onCancel={() => onPresentModal(false)} onAction={() => onPresentModal(false)}>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut malesuada sem eu rutrum pharetra. Aliquam aliquam, ex in aliquet gravida, sapien erat lobortis enim, ac blandit nisi risus non nibh. Suspendisse mauris ipsum, convallis vitae rutrum nec, vehicula eget ligula. Nulla congue condimentum vehicula. Etiam pellentesque interdum neque nec aliquet </p>
-            </Confirm>
+            </Confirm> */}
         </div>
     )
 }
