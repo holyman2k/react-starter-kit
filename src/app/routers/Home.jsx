@@ -45,7 +45,7 @@ export default withRouter(connect(
     },
     (dispatch, props) => {
         setTimeout(() => {
-            dispatch(welcome(props.match.params.greeting || "Hello"));
+            dispatch(welcome("Hello world"));
         }, 0);
         return {
             dispatch,
