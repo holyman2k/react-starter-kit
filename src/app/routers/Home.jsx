@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom"
-import { welcome, presentModal } from "../actions/homeActions";
 import Fade from "../transitions/Fade.jsx"
+import { welcome, presentModal } from "../actions/homeActions";
 import Modal, { Footer, Body, Alert, Confirm } from "../components/Modal.jsx"
 
 const Home = ({ greeting, showModal, onPresentModal }) => {
