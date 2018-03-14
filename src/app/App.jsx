@@ -1,6 +1,6 @@
 import React from "react"
 import { Provider } from "react-redux"
-import { Route } from 'react-router'
+import { Route, Switch } from 'react-router'
 import { ConnectedRouter, routerReducer } from 'react-router-redux'
 import history from "./history"
 import store from "./store.js"
@@ -12,8 +12,10 @@ const App = () => {
         <Provider store={store}>
             <ConnectedRouter history={history}>
                 <Layout>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/:greeting" component={Home} />
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route exact path="/:greeting" component={Home} />
+                    </Switch>
                 </Layout>
             </ConnectedRouter>
         </Provider>
