@@ -2,21 +2,24 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom"
 import { welcome, presentModal } from "../actions/homeActions";
+import Fade from "../transitions/Fade.jsx"
 import Modal, { Footer, Body, Alert, Confirm } from "../components/Modal.jsx"
 
 const Home = ({ greeting, showModal, onPresentModal }) => {
     return (
         <div>
-            <div class="jumbotron">
-                <h1 class="display-4">{greeting}</h1>
-                <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                <hr class="my-4" />
-                <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                <p class="lead">
-                    <Link to="/Ni Hao" class="btn btn-primary">Ni Hao</Link>
-                    <button class="btn btn-info" onClick={() => onPresentModal(true)}>Modal</button>
-                </p>
-            </div>
+            <Fade duration={1000}>
+                <div class="jumbotron">
+                    <h1 class="display-4">{greeting}</h1>
+                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                    <hr class="my-4" />
+                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                    <p class="lead">
+                        <Link to="/Ni Hao" class="btn btn-primary">Ni Hao</Link>
+                        <button class="btn btn-info" onClick={() => onPresentModal(true)}>Modal</button>
+                    </p>
+                </div>
+            </Fade>
 
             {/* <Modal show={showModal} title="Alert" onCancel={() => onPresentModal(false)} onAction={() => onPresentModal(false)}>
                 <Body>
