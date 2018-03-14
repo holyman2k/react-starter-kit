@@ -26,7 +26,7 @@ npm install
 npm start
 ```
 
-# Deplay
+# Deploy
 
 ```
 npm run package
