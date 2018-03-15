@@ -11,9 +11,9 @@ const Nav = ({ }) => {
                 </button>
                 <div class="collapse navbar-collapse" id="navbar">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
+                        <li class="nav-item"><Link class="nav-link" to="/">Home</Link></li>
+                        <li class="nav-item"><Link class="nav-link" to="animation">Animation</Link></li>
+                        <li class="nav-item"><Link class="nav-link" to="popups">Popups</Link></li>
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">

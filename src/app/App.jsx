@@ -6,6 +6,8 @@ import history from "./history"
 import store from "./store.js"
 import Layout from "./routers/Layout.jsx"
 import Home from "./routers/Home.jsx"
+import Animation from "./routers/Animation.jsx"
+import Popups from "./routers/Popups.jsx"
 
 const App = () => {
     return (
@@ -14,6 +16,8 @@ const App = () => {
                 <Layout>
                     <Switch>
                         <Route exact path="/" component={Home} />
+                        <Route exact path="/animation" component={Animation} />
+                        <Route exact path="/popups" component={Popups} />
                         <Route exact path="/:greeting" component={Home} />
                     </Switch>
                 </Layout>

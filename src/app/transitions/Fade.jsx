@@ -26,9 +26,14 @@ export class Fade extends React.Component {
     componentDidMount() {
         const { fade, delay } = this.state;
         const duration = this.props.duration || defautDuration;
-        setTimeout(() => {
+        const fadeToken = setTimeout(() => {
             this.setState({ fade: !fade });
         }, renderDelay + delay);
+        this.setState({ fadeToken });
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.state.fadeToken);
     }
 
     render() {
@@ -86,8 +91,15 @@ export class FadeInOut extends Fade {
         super.componentDidMount();
         const delay = this.getDelay();
         const duration = this.getDuration();
-        setTimeout(() => {
+        const fadeInOutToken = setTimeout(() => {
             this.setState({ fade: false });
         }, delay + renderDelay + duration);
+
+        this.setState({ fadeInOutToken });
+    }
+
+    componentWillUnmount() {
+        super.componentWillUnmount();
+        clearTimeout(this.state.fadeInOutToken);
     }
 }
