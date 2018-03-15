@@ -1,14 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom"
-import Fade from "../transitions/Fade.jsx"
+import { Fade, FadeIn, FadeOut, FadeInOut } from "../transitions/Fade.jsx"
 import { welcome, presentModal } from "../actions/homeActions";
 import Modal, { Footer, Body, Alert, Confirm } from "../components/Modal.jsx"
 
 const Home = ({ greeting, showModal, onPresentModal }) => {
     return (
         <div>
-            <Fade duration={1000}>
+            <FadeIn duration={3000}>
                 <div class="jumbotron">
                     <h1 class="display-4">{greeting}</h1>
                     <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
@@ -19,7 +19,15 @@ const Home = ({ greeting, showModal, onPresentModal }) => {
                         <button class="btn btn-info" onClick={() => onPresentModal(true)}>Modal</button>
                     </p>
                 </div>
-            </Fade>
+            </FadeIn>
+
+            <FadeOut duration={2000}>
+                <h1>Fading out</h1>
+            </FadeOut>
+
+            <FadeInOut duration={2000}>
+                <h1>Fading in out</h1>
+            </FadeInOut>
 
             {/* <Modal show={showModal} title="Alert" onCancel={() => onPresentModal(false)} onAction={() => onPresentModal(false)}>
                 <Body>
@@ -48,7 +56,7 @@ export default withRouter(connect(
     },
     (dispatch, props) => {
         setTimeout(() => {
-            dispatch(welcome(props.match.params.greeting || "Hello world"));
+            // dispatch(welcome(props.match.params.greeting || "Hello world"));
         }, 0);
         return {
             dispatch,
