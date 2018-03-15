@@ -1,14 +1,15 @@
 # react-starter-kit
 
-React Starter Kit is a Project scaffolding to start a empty React Project.  It contains the following components
+React Starter Kit is a Project scaffolding to start a new React Project.  It contains the following components
 
 * React
 * React Redux
 * React Router,
 * React Redux Router, 
+* React Transition Group
 * Bootstrap
 * Bootswatch (Cosmo be default, because I like it)
-* Less
+* SASS
 * Busy Indicator
 * Webpack
 * ExtractPlugin (Extract css into separate file)
@@ -32,4 +33,4 @@ npm start
 npm run package
 ```
 
-The files will be in **Build** folder
+The packaged files will be in the **Build** folder
