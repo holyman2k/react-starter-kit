@@ -1,56 +1,56 @@
-/*selector has-error*/
+// /*selector has-error*/
 .has-error .Select-control {
     border-color: $danger;
 }
-/* Select box size and corner radius */
-.Select-control  {
-    border-radius: 0 !important;
-    height: 43px !important;
-}
-/* Place holder text height */
-.Select-placeholder {
-    line-height: 47px !important;
-    margin-left: 8px;   
-}
+// /* Select box size and corner radius */
+// .Select-control  {
+//     border-radius: 0 !important;
+//     height: 43px !important;
+// }
+// /* Place holder text height */
+// .Select-placeholder {
+//     line-height: 47px !important;
+//     margin-left: 8px;   
+// }
 
-/* search text position (text position after keyboard input */
-.Select-input {
-    height: 41px !important;
-}
+// /* search text position (text position after keyboard input */
+// .Select-input {
+//     height: 41px !important;
+// }
 
-.Select--single .Select-input {
-    padding-left: 18px !important;
-}
+// .Select--single .Select-input {
+//     padding-left: 18px !important;
+// }
 
-.Select--multi .Select-input {
-    margin-left: 18px;   
-}
+// .Select--multi .Select-input {
+//     margin-left: 18px;   
+// }
 
-.Select-value {
-    color: #333 !important;
-}
-/* selected value position and text color */
-.Select--single .Select-value {
-    margin-top:6px !important;
-    padding-left: 18px !important;
-}
-/* selected value border for multi select */
-.Select--multi .Select-value  {
-    margin-top:9px !important;
-    border: solid 1px #ddd !important;
-    background-color: #fafafa !important;
-}
+// .Select-value {
+//     color: #333 !important;
+// }
+// /* selected value position and text color */
+// .Select--single .Select-value {
+//     margin-top:6px !important;
+//     padding-left: 18px !important;
+// }
+// /* selected value border for multi select */
+// .Select--multi .Select-value  {
+//     margin-top:9px !important;
+//     border: solid 1px #ddd !important;
+//     background-color: #fafafa !important;
+// }
 
-/* delete icon position */
-.Select--multi .Select-value-icon {
-    padding: 4px 5px 3px !important;
-}
+// /* delete icon position */
+// .Select--multi .Select-value-icon {
+//     padding: 4px 5px 3px !important;
+// }
 
-/* cursor position */
-.Select-control {
-    line-height: 42px !important;   
-}
-/* dropdown show in front of everything else */
-.Select-menu-outer {
-  z-index: 4 !important;
-}
+// /* cursor position */
+// .Select-control {
+//     line-height: 42px !important;   
+// }
+// /* dropdown show in front of everything else */
+// .Select-menu-outer {
+//   z-index: 4 !important;
+// }
