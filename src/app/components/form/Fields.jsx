@@ -51,7 +51,6 @@ export const Select = ({ options, input, label, meta: { touched, error, warning 
             <ReactSelect multi={multi} name={input.name} simpleValue value={input.value} options={options} autoload={autoload}
                 onChange={value => onChange(value)} />
         </FormField>
-
     );
 };
 

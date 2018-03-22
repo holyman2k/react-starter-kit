@@ -6,7 +6,6 @@ import { Field, reduxForm, createReduxForm } from "redux-form"
 import { Input, SimpleSelect, Select, AsyncSelect } from "../components/form/Fields.jsx"
 import { welcome } from "../actions/homeActions";
 
-
 const Form = ({ handleSubmit, pristine, reset, submitting }) => {
     const options = [
         { label: "-- Select --" },
@@ -15,7 +14,7 @@ const Form = ({ handleSubmit, pristine, reset, submitting }) => {
     ];
     const loadCountries = (input, callback) => {
 
-        let url = `/country.json`;
+        const url = `/country.json`;
         axios.get(url).then((response) => {
             const countries = response.data;
             const options = countries.map(item => {
