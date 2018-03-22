@@ -8,6 +8,7 @@ import Layout from "./routers/Layout.jsx"
 import Home from "./routers/Home.jsx"
 import Animation from "./routers/Animation.jsx"
 import Popups from "./routers/Popups.jsx"
+import Form from "./routers/Form.jsx"
 
 const App = () => {
     return (
@@ -18,6 +19,7 @@ const App = () => {
                         <Route exact path="/" component={Home} />
                         <Route exact path="/animation" component={Animation} />
                         <Route exact path="/popups" component={Popups} />
+                        <Route exact path="/form" component={Form} />
                         <Route exact path="/:greeting" component={Home} />
                     </Switch>
                 </Layout>
