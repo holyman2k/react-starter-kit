@@ -65,7 +65,7 @@ const validate = values => {
         errors.type = 'Required'
     }
     if (!values.country) {
-        errors.type = 'Required'
+        errors.country = 'Required'
     }
     return errors
 }

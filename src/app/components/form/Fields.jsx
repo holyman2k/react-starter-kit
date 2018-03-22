@@ -1,5 +1,6 @@
 import React from "react";
 import ReactSelect from 'react-select';
+import { Async } from 'react-select';
 
 export const FormField = ({ children, input, label, meta: { touched, error, warning } }) => {
     const classNames = touched && error ? "form-group has-error" : "form-group"
@@ -62,8 +63,8 @@ export const AsyncSelect = ({ loadOptions, input, label, meta: { touched, error,
     };
     return (
         <FormField input={input} meta={{ touched, error, warning }} label={label}>
-            <ReactSelect.Async multi={multi} name={input.name} simpleValue value={input.value} autoload={autoload}
-                onChange={value => onChange(value)} loadOptions={loadOptions} />
+            <Async multi={multi} name={input.name} simpleValue value={input.value} autoload={autoload}
+                onChange={value => onChange(value)} loadOptions={loadOptions} type="select"/>
         </FormField>
 
     );

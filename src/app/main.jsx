@@ -1,7 +1,7 @@
-require("jquery");
-require("bootstrap");
-require ("./css/main.scss");
-require('../../node_modules/react-select/dist/react-select.css');
+import "jquery";
+import "bootstrap";
+import "react-select/dist/react-select.css";
+import "./css/main.scss";
 
 import React from "react"
 import { render } from "react-dom"
