@@ -7,12 +7,14 @@ React Starter Kit is a Project scaffolding to start a new React Project.  It con
 * React Router,
 * React Redux Router, 
 * React Transition Group
-* Bootstrap
-* Bootswatch (Cosmo be default, because I like it)
+* Redux Form,
+* Bootstrap 4,
+* Bootswatch (Cosmo as default, because I like it)
 * SASS
-* Busy Indicator
 * Webpack
-* ExtractPlugin (Extract css into separate file)
+* Mini CSS Extract (Extract css into separate file)
+* Busy Indicator (custom)
+* Bootstrap Modal for react (custom)
 
 # Install
 
