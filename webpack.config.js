@@ -1,6 +1,6 @@
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 
 const build = {
@@ -37,26 +37,32 @@ module.exports = {
                 use: "file-loader?name=font/[name].[ext]",
             },
             {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract({ use: "css-loader", publicPath: "../" }),
-            },
-            {
-                test: /\.(scss)$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        "css-loader", // translates CSS into CommonJS modules
-                        {
-                            loader: "postcss-loader", // Run post css actions
-                            options: {
-                                options: {
-                                    plugins: () => [require("precss"), require("autoprefixer")]
-                                },
-                            }
-                        },
-                        "sass-loader" // compiles Sass to CSS
-                    ]
-                }),
+                test: /\.(css|sass|scss)$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 2,
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: () => [
+                                require('autoprefixer')
+                            ],
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }
+                ]
             },
         ]
     },
@@ -70,7 +76,7 @@ module.exports = {
             $: "jquery",
             jQuery: "jquery"
         }),
-        new ExtractTextPlugin({
+        new MiniCssExtractPlugin({
             filename: "css/style.css"
         }),
     ],

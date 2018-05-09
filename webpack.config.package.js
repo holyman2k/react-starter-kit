@@ -1,18 +1,18 @@
-const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const path = require('path');
+const webpack = require("webpack");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const path = require("path");
 
 const build = {
-    path: path.join(__dirname, 'build/js')
+    path: path.join(__dirname, "build/js")
 }
 
 module.exports = {
-    context: path.join(__dirname, 'src'),
+    context: path.join(__dirname, "src"),
     devtool: false,
-    entry: './app/main.jsx',
-
+    entry: "./app/main.jsx",
 
     module: {
         rules: [
@@ -32,68 +32,75 @@ module.exports = {
                 use: "file-loader?name=font/[name].[ext]",
             },
             {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract({ use: "css-loader", publicPath: "../" }),
-            },
-            {
-                test: /\.(scss)$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        "css-loader", // translates CSS into CommonJS modules
-                        {
-                            loader: "postcss-loader", // Run post css actions
-                            options: {
-                                options: {
-                                    plugins: () => [require("precss"), require("autoprefixer")]
-                                },
-                            }
-                        },
-                        "sass-loader" // compiles Sass to CSS
-                    ]
-                }),
+                test: /\.(css|sass|scss)$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            plugins: () => [
+                                require("autoprefixer")
+                            ],
+                        }
+                    },
+                    "sass-loader",
+                ]
             },
         ]
     },
 
-
     output: {
         path: build.path,
-        filename: 'main.min.js'
+        filename: "main.min.js"
     },
 
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production')
+            "process.env": {
+                NODE_ENV: JSON.stringify("production")
             }
         }),
         new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery'
+            $: "jquery",
+            jQuery: "jquery"
         }),
-        new CleanWebpackPlugin(['build'], {
+        new CleanWebpackPlugin(["build"], {
             verbose: true,
             dry: false,
         }),
         new CopyWebpackPlugin([
-            { from: 'index.html', to: '../index.html' },
+            { from: "index.html", to: "../index.html" },
         ]),
-        new webpack.optimize.UglifyJsPlugin({
-            output: { comments: false },
-            compress: {
-                sequences: true,
-                dead_code: true,
-                conditionals: true,
-                booleans: true,
-                unused: true,
-                if_return: true,
-                join_vars: true,
-                drop_console: true
-            },
-            mangle: false,
-            sourcemap: false,
+        new CopyWebpackPlugin([
+            { from: "country.json", to: "../country.json" },
+        ]),
+        new MiniCssExtractPlugin({
+            filename: "../css/style.css"
         }),
-        new ExtractTextPlugin('../css/style.css'),
     ],
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                uglifyOptions: {
+                    output: {
+                        comments: false
+                    },
+                    minify: {},
+                    compress: {
+                        booleans: true,
+                        sequences: true,
+                        dead_code: true,
+                        conditionals: true,
+                        unused: true,
+                        if_return: true,
+                        join_vars: true,
+                        drop_console: true
+                    },
+                    mangle: true,
+                    sourcemap: false,
+                }
+            }),
+        ]
+    },
 };
