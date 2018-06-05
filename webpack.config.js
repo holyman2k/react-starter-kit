@@ -11,7 +11,7 @@ module.exports = {
     context: path.resolve(__dirname, "src"),
     devtool: "inline-sourcemap",
     entry: "./app/main.jsx",
-
+    mode: "development",
     devServer: {
         inline: true,
         port: 3000,
