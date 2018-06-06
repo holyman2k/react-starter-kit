@@ -2,7 +2,7 @@ const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const path = require("path");
 
 const build = {
@@ -13,6 +13,7 @@ module.exports = {
     context: path.join(__dirname, "src"),
     devtool: false,
     entry: "./app/main.jsx",
+    mode: "production",
 
     module: {
         rules: [
@@ -52,7 +53,7 @@ module.exports = {
 
     output: {
         path: build.path,
-        filename: "main.min.js"
+        filename: "main.min.js",
     },
 
     plugins: [
@@ -76,7 +77,7 @@ module.exports = {
             { from: "country.json", to: "../country.json" },
         ]),
         new MiniCssExtractPlugin({
-            filename: "../css/style.css"
+            filename: "../css/style.css",
         }),
     ],
     optimization: {
@@ -84,23 +85,13 @@ module.exports = {
             new UglifyJsPlugin({
                 uglifyOptions: {
                     output: {
-                        comments: false
-                    },
-                    minify: {},
-                    compress: {
-                        booleans: true,
-                        sequences: true,
-                        dead_code: true,
-                        conditionals: true,
-                        unused: true,
-                        if_return: true,
-                        join_vars: true,
-                        drop_console: true
+                        comments: false,
+                        beautify: false,
                     },
                     mangle: true,
                     sourcemap: false,
                 }
             }),
-        ]
+        ],
     },
 };
