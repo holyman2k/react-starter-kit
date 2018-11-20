@@ -39,7 +39,7 @@
     "bootstrap": "^4.0.0",
     "bootswatch": "^4.0.0",
     "clone": "^2.1.1",
-    "jquery": "^3.3.1",
+    "jquery-slim": "^3.0.0",
     "popper.js": "^1.12.9",
     "react": "^16.0",
     "react-dom": "^16.0",
