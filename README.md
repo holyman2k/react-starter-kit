@@ -13,6 +13,7 @@ React Starter Kit is a Project scaffolding to start a new React Project.  It con
 * SASS
 * Webpack
 * Mini CSS Extract (Extract css into separate file)
+* React-loadable (split routers into different file, speed up loading)
 * Busy Indicator (custom)
 * Bootstrap Modal for react (custom)
 
