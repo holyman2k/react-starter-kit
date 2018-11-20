@@ -1,12 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter, Link } from "react-router-dom"
-import { Fade, FadeIn, FadeOut, FadeInOut } from "../transitions/Fade.jsx"
+import { withRouter, Link } from "react-router-dom";
+import { Fade, FadeIn, FadeOut, FadeInOut } from "../transitions/Fade.jsx";
 import { welcome, presentModal } from "../actions/homeActions";
-import Modal, { Footer, Body, Alert, Confirm } from "../components/Modal.jsx"
+import Modal, { Footer, Body, Alert, Confirm } from "../components/Modal.jsx";
 
 const Animation = ({ greeting, showModal, onPresentModal }) => {
-
     return (
         <div>
             <h1>Animation</h1>
@@ -23,7 +22,7 @@ const Animation = ({ greeting, showModal, onPresentModal }) => {
                 <h2>Fading in out</h2>
             </FadeInOut>
         </div>
-    )
-}
+    );
+};
 
 export default withRouter(connect()(Animation));

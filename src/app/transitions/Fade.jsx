@@ -1,18 +1,17 @@
 import React from "react";
-import Transition from 'react-transition-group/Transition';
+import Transition from "react-transition-group/Transition";
 
 const defautDuration = 1000;
 const renderDelay = 200;
 
 export class Fade extends React.Component {
-
     constructor(props) {
         super();
         const duration = props.duration || defautDuration;
         this.state = {
             fade: props.fade,
             duration: duration,
-            delay: props.delay || 0,
+            delay: props.delay || 0
         };
     }
 
@@ -42,32 +41,33 @@ export class Fade extends React.Component {
 
         const defaultStyle = {
             transition: `opacity ${duration}ms ease-in-out`,
-            opacity: 0,
-        }
+            opacity: 0
+        };
 
         const transitionStyles = {
             entering: { opacity: 1 },
             entered: { opacity: 1 },
-            existed: { opacity: 0 },
+            existed: { opacity: 0 }
         };
 
         return (
             <Transition in={fade} timeout={duration}>
-                {(state) => {
+                {state => {
                     return (
-                        <div style={{
-                            ...defaultStyle,
-                            ...transitionStyles[state]
-                        }}>
+                        <div
+                            style={{
+                                ...defaultStyle,
+                                ...transitionStyles[state]
+                            }}
+                        >
                             {children}
                         </div>
-                    )
-                }
-                }
+                    );
+                }}
             </Transition>
-        )
+        );
     }
-};
+}
 
 export class FadeIn extends Fade {
     constructor(props) {
@@ -79,7 +79,6 @@ export class FadeOut extends Fade {
         super({ ...props, fade: true });
     }
 }
-
 
 export class FadeInOut extends Fade {
     constructor(props) {
