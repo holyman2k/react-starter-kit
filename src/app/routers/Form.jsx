@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import { Field, reduxForm, createReduxForm } from "redux-form";
 import { Input, SimpleSelect, Select, AsyncSelect } from "../components/form/Fields.jsx";
-import { welcome } from "../actions/homeActions";
+import { editUser as editUserAction, updateUser } from "../actions/userActions";
 
-const Form = ({ handleSubmit, pristine, reset, submitting }) => {
+const Form = ({ handleSubmit, pristine, reset, submitting, saveUser }) => {
     const options = [{ label: "-- Select --" }, { value: "admin", label: "Admin" }, { value: "user", label: "User" }];
     const loadCountries = (input, callback) => {
         const url = `/country.json`;
@@ -21,9 +21,14 @@ const Form = ({ handleSubmit, pristine, reset, submitting }) => {
             callback(null, { options, complete: true });
         });
     };
+
+    const onSubmit = values => {
+        saveUser(values, new Date().getTime());
+    };
+
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <Field name="username" component={Input} type="text" label="User Name" list={"hello"} />
                 <Field name="email" component={Input} type="email" label="Email" />
                 <Field name="firstName" component={Input} type="text" label="First Name" />
@@ -31,8 +36,11 @@ const Form = ({ handleSubmit, pristine, reset, submitting }) => {
                 <Field name="country" component={AsyncSelect} label="Country" loadOptions={loadCountries} />
                 <Field name="type" component={Select} label="Account Type" options={options} />
                 <p>
-                    <button class="btn btn-primary" type="submit" disabled={submitting || pristine}>
+                    <button class="btn btn-primary" type="submit" disabled={submitting}>
                         Submit
+                    </button>
+                    <button class="btn btn-secondary" type="reset" onClick={reset} disabled={submitting}>
+                        Reset
                     </button>
                 </p>
             </form>
@@ -70,20 +78,23 @@ const validate = values => {
 const ReduxForm = reduxForm({
     form: "form",
     validate
-    // initialValues: { firstName: "Charlie", lastName: "Wu", email: "charliewu@hotmail.com" },
 })(Form);
 
 export default withRouter(
     connect(
         (store, props) => {
-            return {};
+            return {
+                initialValues: store.user.editUser
+            };
         },
         (dispatch, props) => {
-            setTimeout(() => {}, 0);
+            setTimeout(() => {
+                dispatch(editUserAction({}));
+            }, 0);
             return {
-                dispatch,
-                onSubmit: value => {
-                    console.log(value);
+                saveUser: (value, version) => {
+                    console.log("maping on submit", value, version);
+                    dispatch(updateUser(value, version));
                 }
             };
         }
