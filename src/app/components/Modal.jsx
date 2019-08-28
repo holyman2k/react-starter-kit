@@ -64,11 +64,15 @@ class Modal extends React.Component {
 Modal.propTypes = {
     show: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,
-    children: PropTypes.arrayOf(function(propValue, key, componentName, location, propFullName) {
-        if (!Array.isArray(propValue) || propValue.filter(_ => _.type.name != "Body" && _.type.name != "Footer").length > 0) {
-            return new Error(`Invalid prop children supplied to ${componentName}. Children can only contain type Model.Body or Model.Footer`);
+    children: (propValue, propName, componentName) => {
+        if (Array.isArray(propValue)) {
+            if (propValue.filter(_ => _.type.name != "Body" && _.type.name != "Footer").length > 0) {
+                return new Error(`Invalid prop children supplied to ${componentName}. Children can only contain type Model.Body or Model.Footer`);
+            }
+        } else if (propValue == null) {
+            return new Error(`Invalid prop children supplied to ${componentName}. Children need to contain type Model.Body or Model.Footer`);
         }
-    }),
+    },
     onCancel: PropTypes.func.isRequired,
     size: PropTypes.string // "large", "small", "normal"
 };
