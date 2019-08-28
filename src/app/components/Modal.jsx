@@ -36,11 +36,10 @@ class Modal extends React.Component {
     }
 
     render() {
-        const { show, children, title, size = "large" } = this.props;
+        const { children, title, size = "large" } = this.props;
         const sizeClass = size == "large" ? "modal-lg" : size == "small" ? "modal-sm" : "";
-        const Body = Array.isArray(children) ? children.filter(_ => _.type.name == "Body").pop() : null;
+        const Body = Array.isArray(children) ? children.filter(_ => _.type.name == "Body").pop() : children;
         const Footer = Array.isArray(children) ? children.filter(_ => _.type.name == "Footer").pop() : null;
-        const showButtons = Body == null && Footer == null;
 
         return (
             <div class="modal fade" tabIndex="-1" role="dialog" data-backdrop="static" data-keyboard="true" data-focus="true">
