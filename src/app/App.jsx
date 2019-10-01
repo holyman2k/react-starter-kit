@@ -25,7 +25,7 @@ const App = () => {
                         <Route exact path="/" component={Lazy(() => import("./routers/Home.jsx"))} />
                         <Route exact path="/animation" component={Lazy(() => import("./routers/Animation.jsx"))} />
                         <Route exact path="/popups" component={Lazy(() => import("./routers/Popups.jsx"))} />
-                        <Route exact path="/form" component={Lazy(() => import("./routers/Form.jsx"))} />
+                        <Route exact path="/todo" component={Lazy(() => import("./routers/Todo.jsx"))} />
                         <Route exact path="/:greeting" component={Lazy(() => import("./routers/Home.jsx"))} />
                     </Switch>
                 </Layout>

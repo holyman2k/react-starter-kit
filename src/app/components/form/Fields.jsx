@@ -1,6 +1,7 @@
 import React from "react";
 import ReactSelect from "react-select";
 import { Async } from "react-select";
+import NumberFormat from "react-number-format";
 
 export const FormField = ({ children, input, label, meta: { touched, error, warning } }) => {
     const classNames = touched && error ? "form-group has-error" : "form-group";
@@ -10,6 +11,32 @@ export const FormField = ({ children, input, label, meta: { touched, error, warn
             {children}
             {touched && ((error && <div class="text-danger">{error}</div>) || (warning && <div class="text-warning">>{warning}</div>))}
         </div>
+    );
+};
+
+export const NumberInput = ({ input, touch, prefix, label, valueDidChange, meta: { touched, error, warning } }) => {
+    const onValueChange = values => {
+        const { floatValue } = values;
+        input.onChange(floatValue);
+        if (valueDidChange) valueDidChange(floatValue);
+    };
+    const onBlur = () => {
+        input.onBlur(input.value);
+    };
+    return (
+        <FormField input={input} meta={{ touched, error, warning }} label={label}>
+            <NumberFormat
+                class="form-control"
+                value={input.value}
+                placeholder={label}
+                thousandSeparator={true}
+                onValueChange={onValueChange}
+                prefix={prefix}
+                {...input}
+                onBlur={onBlur}
+                onChange={() => {}} // overwrite onChange, data change is handled by onValueChange
+            />
+        </FormField>
     );
 };
 
