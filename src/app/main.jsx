@@ -1,6 +1,5 @@
 import "jquery";
 import "bootstrap";
-import "react-select/dist/react-select.css";
 import "./css/main.scss";
 
 import React from "react";

@@ -1,8 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { Route, Switch } from "react-router";
-import { ConnectedRouter } from "react-router-redux";
-import history from "./history";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import store from "./store.js";
 import Layout from "./routers/Layout.jsx";
 import Loader from "react-loader-advanced";
@@ -19,7 +17,7 @@ const Lazy = loader => {
 const App = () => {
     return (
         <Provider store={store}>
-            <ConnectedRouter history={history}>
+            <Router>
                 <Layout>
                     <Switch>
                         <Route exact path="/" component={Lazy(() => import("./routers/Home.jsx"))} />
@@ -29,7 +27,7 @@ const App = () => {
                         <Route exact path="/:greeting" component={Lazy(() => import("./routers/Home.jsx"))} />
                     </Switch>
                 </Layout>
-            </ConnectedRouter>
+            </Router>
         </Provider>
     );
 };

@@ -53,14 +53,17 @@
     "react-loader-advanced": "^1.7.1",
     "react-number-format": "^4.2.0",
     "react-open-iconic-svg": "^3.0.1",
-    "react-redux": "^5.0.6",
-    "react-router-dom": "^4.2.2",
-    "react-router-redux": "^5.0.0-alpha.9",
-    "react-select": "^1.2.0",
+    "react-redux": "^5.1.1",
+    "react-router-dom": "^4.3.1",
+    "react-select": "^3.0.6",
     "react-transition-group": "^2.2.1",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^4.4.1",
     "redux-thunk": "^2.2.0"
+  },
+  "prettier": {
+      "tabWidth": 4,
+      "printWidth": 150
   }
 }
