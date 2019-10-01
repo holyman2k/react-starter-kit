@@ -5,7 +5,8 @@
         "email": "c.wu@webfm.net",
         "hour": 4,
         "country": "cn",
-        "type": "home"
+        "type": "home",
+        "subTask": [{ "task": "From Woolworth", "hour": 3 }]
     },
     {
         "id": 1569890442979,

@@ -1,15 +1,15 @@
 import React from "react";
-import idx from "idx";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { editTodo as editTodo } from "../actions/todoActions";
-import EditTodo from "../components/EditTodo.jsx";
+import { PlusIcon } from "react-open-iconic-svg";
+import { editTodo } from "../actions/todoActions";
+import EditTodo from "../components/Todo/EditTodo.jsx";
 
 const Todo = ({ todoList, onEditTodo }) => {
     return (
         <div>
-            <button class="btn btn-primary" onClick={() => onEditTodo({})}>
-                Add
+            <button class="btn btn-primary mb-2" onClick={() => onEditTodo({})}>
+                <PlusIcon />
             </button>
             <table class="table">
                 <thead>
