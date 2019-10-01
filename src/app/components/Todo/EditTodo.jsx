@@ -25,7 +25,7 @@ const PlainFormInput = Input(PlainFormContainer);
 
 const EditTodo = ({ editTodo, typeList, countryList, onCancel, onSave }) => {
     return (
-        <Modal show={editTodo != null} title="Form" onCancel={onCancel}>
+        <Modal show={editTodo != null} title="Todo" onCancel={onCancel}>
             <Form
                 subscription={{ submitting: true, pristine: true }}
                 mutators={{
