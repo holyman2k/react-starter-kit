@@ -78,6 +78,7 @@ export const Select = container => {
         const onChange = value => {
             input.onChange(value ? value : null);
         };
+        
         return (
             <Wrapper input={input} meta={{ touched, error, warning }} label={label}>
                 <ReactSelect

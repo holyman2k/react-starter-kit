@@ -46,9 +46,9 @@ const EditTodo = ({ editTodo, typeList, countryList, onCancel, onSave }) => {
                     <form onSubmit={handleSubmit}>
                         <Field name="task" component={BaseInput} type="text" label="Task" />
                         <Field name="email" component={BaseInput} type="email" label="Email" />
-                        <hr/>
+                        <hr />
                         <Field name="hour" component={FormNumberInput} label="Hour" prefix="" decimalScale={2} fixedDecimalScale={true} />
-                        <Field name="type" component={FormSelect} label="Account Type" options={typeList} />
+                        <Field name="type" component={FormSelect} label="Type" options={typeList} />
                         <FormSpy subscription={{ values: true }}>
                             {props => {
                                 const isWork = idx(props, _ => _.values.type) == "work";
@@ -56,11 +56,9 @@ const EditTodo = ({ editTodo, typeList, countryList, onCancel, onSave }) => {
                                 return <Field name="country" component={FormSelect} label="Country" options={countries} />;
                             }}
                         </FormSpy>
-                        <hr/>
+                        <hr />
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label text-sm-right">
-                                Sub Tasks:
-                            </label>
+                            <label class="col-sm-2 col-form-label text-sm-right">Sub Tasks:</label>
                             <div class="col-sm-8">
                                 <FieldArray name="subTask">
                                     {({ fields }) =>
@@ -106,6 +104,7 @@ const EditTodo = ({ editTodo, typeList, countryList, onCancel, onSave }) => {
 };
 
 const validate = values => {
+    console.log(values);
     const errors = {};
     if (!values.task) {
         errors.task = "Required";
@@ -115,6 +114,9 @@ const validate = values => {
 
     if (!values.hour) {
         errors.hour = "Required";
+    }
+    if (!values.type || values.type.length == 0) {
+        errors.type = "Required";
     }
     if (!values.email) {
         errors.email = "Required";
@@ -127,7 +129,7 @@ const validate = values => {
 export default withRouter(
     connect(
         (store, props) => {
-            const typeList = [{ label: "-- Select --" }, { value: "work", label: "Work" }, { value: "home", label: "Home" }];
+            const typeList = [{ value: "", label: "-- Select --" }, { value: "work", label: "Work" }, { value: "home", label: "Home" }];
             return {
                 editTodo: store.todo.editTodo,
                 countryList: store.todo.countries,
