@@ -2,12 +2,12 @@ import axios from "axios";
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
-import { Field, reduxForm, createReduxForm } from "redux-form";
+import { Field, reduxForm, formValueSelector, change } from "redux-form";
 import { Input, SimpleSelect, Select, AsyncSelect } from "../components/form/Fields.jsx";
-import { editUser as editUserAction, updateUser } from "../actions/userActions";
+import { editUser as editUserAction, updateUser, updateBaseRate } from "../actions/userActions";
 
-const Form = ({ handleSubmit, pristine, reset, submitting, saveUser }) => {
-    const options = [{ label: "-- Select --" }, { value: "admin", label: "Admin" }, { value: "user", label: "User" }];
+const Form = ({ handleSubmit, dispatch, formState: { country, baseRate }, typeOptions, pristine, reset, submitting, saveUser }) => {
+
     const loadCountries = (input, callback) => {
         const url = `/country.json`;
         axios.get(url).then(response => {
@@ -26,15 +26,27 @@ const Form = ({ handleSubmit, pristine, reset, submitting, saveUser }) => {
         saveUser(values, new Date().getTime());
     };
 
+    const countryDidChange = (value) => {
+        if (value == "AU") {
+            dispatch(change("form", "baseRate", 1000));
+        } else {
+            dispatch(change("form", "baseRate", 0));
+        }
+    }
+
+    const typeDidChange = (value) => {
+        console.log("type", value);
+    }
+
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Field name="username" component={Input} type="text" label="User Name" list={"hello"} />
-                <Field name="email" component={Input} type="email" label="Email" />
+                <Field name="email" component={Input} type="email" label="Email" disabled={baseRate == 0} />
                 <Field name="firstName" component={Input} type="text" label="First Name" />
                 <Field name="lastName" component={Input} type="text" label="Last Name" />
-                <Field name="country" component={AsyncSelect} label="Country" loadOptions={loadCountries} />
-                <Field name="type" component={Select} label="Account Type" options={options} />
+                <Field name="country" component={AsyncSelect} label="Country" loadOptions={loadCountries} valueDidChange={countryDidChange} />
+                <Field name="type" component={Select} label="Account Type" options={typeOptions} valueDidChange={typeDidChange} />
                 <p>
                     <button class="btn btn-primary" type="submit" disabled={submitting}>
                         Submit
@@ -81,10 +93,19 @@ const ReduxForm = reduxForm({
 })(Form);
 
 export default withRouter(
+
     connect(
         (store, props) => {
+            const selector = formValueSelector('form');
+            const formState = selector(store, "country", "type", "baseRate");
+            const initialValues = store.user.editUser || {};
+            const baseRate = formState.baseRate || 0;
+            const country = formState.country || "";
+            const typeOptions = country != "AU" ? [{ value: "", label: "-- Select --" }, { value: "admin", label: "Admin" }, { value: "user", label: "User" }] : [];
             return {
-                initialValues: store.user.editUser
+                initialValues: initialValues,
+                formState,
+                typeOptions,
             };
         },
         (dispatch, props) => {
@@ -95,7 +116,8 @@ export default withRouter(
                 saveUser: (value, version) => {
                     console.log("maping on submit", value, version);
                     dispatch(updateUser(value, version));
-                }
+                },
+                dispatch
             };
         }
     )(ReduxForm)

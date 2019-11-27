@@ -13,10 +13,10 @@ export const FormField = ({ children, input, label, meta: { touched, error, warn
     );
 };
 
-export const Input = ({ input, label, type, meta: { touched, error, warning } }) => {
+export const Input = ({ input, label, type, meta: { touched, error, warning }, disabled }) => {
     return (
         <FormField input={input} meta={{ touched, error, warning }} label={label}>
-            <input class="form-control" {...input} placeholder={label} type={type} />
+            <input class="form-control" {...input} placeholder={label} type={type} disabled={disabled} />
         </FormField>
     );
 };
@@ -47,10 +47,16 @@ export const SimpleSelect = ({ options, input, label, meta: { touched, error, wa
 
 // options [{value:"v", label:"l"}]
 // value must be a string
-export const Select = ({ options, input, label, meta: { touched, error, warning }, autoload = true, multi = false }) => {
+export const Select = ({ options, input, label, meta: { touched, error, warning }, autoload = true, multi = false, valueDidChange }) => {
     const onChange = value => {
         input.onChange(value ? value : null);
+        if (valueDidChange) valueDidChange(value);
     };
+    if (options.length == 0 && input.value != null) {
+        setTimeout(() => {
+            input.onChange(null);
+        }, 0);
+    }
     return (
         <FormField input={input} meta={{ touched, error, warning }} label={label}>
             <ReactSelect
@@ -68,9 +74,10 @@ export const Select = ({ options, input, label, meta: { touched, error, warning 
 
 // options [{value:"v", label:"l"}]
 // value must be a string
-export const AsyncSelect = ({ loadOptions, input, label, meta: { touched, error, warning }, autoload = true, multi = false }) => {
+export const AsyncSelect = ({ loadOptions, input, label, meta: { touched, error, warning }, autoload = true, multi = false, valueDidChange }) => {
     const onChange = value => {
         input.onChange(value ? value : null);
+        if (valueDidChange) valueDidChange(value);
     };
     return (
         <FormField input={input} meta={{ touched, error, warning }} label={label}>
