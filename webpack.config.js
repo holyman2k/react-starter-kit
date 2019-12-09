@@ -27,7 +27,7 @@ module.exports = {
                 use: {
                     loader: "babel-loader",
                     query: {
-                        presets: ["react", "stage-0", "es2015"],
+                        presets: ["@babel/preset-env", "@babel/preset-react"],
                         plugins: ["react-html-attrs"],
                     },
                 },
@@ -70,6 +70,7 @@ module.exports = {
     output: {
         path: build.path,
         filename: "js/main.min.js",
+        publicPath: '/'
     },
     plugins: [
         new webpack.ProvidePlugin({
