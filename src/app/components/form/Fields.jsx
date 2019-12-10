@@ -78,26 +78,19 @@ export const SimpleSelect = container => {
 export const Select = container => {
 	const Wrapper = container;
 	return ({ options, input, label, meta: { touched, error, warning }, autoload = true, multi = false }) => {
-		const className = touched && error ? "is-invalid" : "";
 		const onChange = value => {
 			input.onChange(value ? value.value : null);
 		};
 		const value = options.filter(item => item.value == input.value).pop();
 		const styles = {
-			control: (provided, state) => {
-				console.log("control provided", provided);
-				return {
-					...provided,
-					border: touched && error ? "1px solid #FF0039" : "1px solid #ced4da",
-					borderRadius: 0,
-					color: state.isSelected ? "red" : "blue",
-					boxShadow: "none",
-					"&:hover": { borderColor: touched && error ? "#FF0039" : "#CED4DA" }
-				};
-			},
-			container: (provided, state) => {
-				return { border: 0 };
-			}
+			control: (provided, state) => ({
+				...provided,
+				border: touched && error ? "1px solid #FF0039" : "1px solid #ced4da",
+				borderRadius: 0,
+				color: state.isSelected ? "red" : "blue",
+				boxShadow: "none",
+				"&:hover": { borderColor: touched && error ? "#FF0039" : "#CED4DA" }
+			})
 		};
 		return (
 			<Wrapper input={input} meta={{ touched, error, warning }} label={label}>
@@ -121,66 +114,35 @@ export const Select = container => {
 export const AsyncSelect = container => {
 	const Wrapper = container;
 	return ({ loadOptions, input, label, meta: { touched, error, warning }, autoload = true, multi = false }) => {
-		const className = touched && error ? "is-invalid" : "";
 		const onChange = value => {
-			input.onChange(value ? value : null);
+			input.onChange(value ? value.value : null);
+		};
+		const value = options.filter(item => item.value == input.value).pop();
+		const styles = {
+			control: (provided, state) => ({
+				...provided,
+				border: touched && error ? "1px solid #FF0039" : "1px solid #ced4da",
+				borderRadius: 0,
+				color: state.isSelected ? "red" : "blue",
+				boxShadow: "none",
+				"&:hover": { borderColor: touched && error ? "#FF0039" : "#CED4DA" }
+			})
 		};
 		return (
 			<Wrapper input={input} meta={{ touched, error, warning }} label={label}>
 				<Async
-					className={className}
+					isClearable={true}
+					styles={styles}
 					multi={multi}
 					name={input.name}
 					simpleValue
-					value={input.value}
+					value={value}
 					autoload={autoload}
 					onChange={value => onChange(value)}
 					loadOptions={loadOptions}
 					type="select"
 				/>
 			</Wrapper>
-		);
-	};
-};
-
-export const FormContainer = ({ children, input, label, meta: { touched, error, warning } }) => {
-	const classNames = touched && error ? "form-group has-error" : "form-group";
-	return (
-		<div class={classNames}>
-			<label htmlFor={input.name}>{label}</label>
-			{children}
-			{touched && ((error && <div class="text-danger">{error}</div>) || (warning && <div class="text-warning">>{warning}</div>))}
-		</div>
-	);
-};
-
-export const PlainFormContainer = ({ children, meta: { touched, error, warning } }) => {
-	const classNames = touched && error ? "has-error mb-2" : "mb-2";
-	return (
-		<div class={classNames}>
-			{children}
-			{touched && ((error && <div class="text-danger">{error}</div>) || (warning && <div class="text-warning">>{warning}</div>))}
-		</div>
-	);
-};
-
-/// labeSize need to be between 1 to 11 as according to bootstrap column
-/// margin need to be between 1 to 5 as according to bootstrap column
-export const InlineFormContainer = labelSize => {
-	return ({ children, input, label, meta: { touched, error, warning } }) => {
-		const bodySizeClass = `col-sm-${12 - labelSize} `;
-		const labelSizeClass = `col-sm-${labelSize} col-form-label text-sm-right`;
-		const classNames = ["form-group", "row"];
-		return (
-			<div class={classNames.join(" ")}>
-				<label class={labelSizeClass} htmlFor={input.name}>
-					{label}
-				</label>
-				<div class={bodySizeClass}>
-					{children}
-					{touched && ((error && <div class="text-danger">{error}</div>) || (warning && <div class="text-warning">>{warning}</div>))}
-				</div>
-			</div>
 		);
 	};
 };
