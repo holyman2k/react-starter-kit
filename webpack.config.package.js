@@ -23,8 +23,8 @@ module.exports = {
 				use: {
 					loader: "babel-loader",
 					query: {
-                        presets: ["@babel/preset-env", "@babel/preset-react"],
-                        plugins: ["react-html-attrs"],
+						presets: ["@babel/preset-env", "@babel/preset-react"],
+						plugins: ["react-html-attrs"]
 					}
 				}
 			},
@@ -40,7 +40,7 @@ module.exports = {
 					{
 						loader: "postcss-loader",
 						options: {
-							plugins: () => [require("autoprefixer")]
+							plugins: () => [require("precss"), require("autoprefixer")]
 						}
 					},
 					"sass-loader"
@@ -67,8 +67,12 @@ module.exports = {
 			jQuery: "jquery"
 		}),
 		new CleanWebpackPlugin(),
-		new CopyWebpackPlugin([{ from: "index.html", to: "index.html" }]),
-		new CopyWebpackPlugin([{ from: "country.json", to: "country.json" }]),
+		new CopyWebpackPlugin([
+			{ from: "index.html", to: "index.html" },
+			{ from: "country.json", to: "country.json" },
+			{ from: "_redirects", to: "_redirects", toType: "file" }
+		]),
+
 		new MiniCssExtractPlugin({
 			filename: "css/style.css"
 		})

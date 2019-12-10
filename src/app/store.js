@@ -1,18 +1,15 @@
 import { applyMiddleware, createStore, combineReducers, compose } from "redux";
-import { routerMiddleware, routerReducer } from "react-router-redux";
-import logger from "redux-logger";
+import { createLogger } from "redux-logger";
+import { createPromise } from "redux-promise-middleware";
 import thunk from "redux-thunk";
-import promise from "redux-promise-middleware";
 import reducers from "./reducers/index.js";
-import history from "./history.js";
 
-const middleware = applyMiddleware(promise(), thunk, logger, routerMiddleware(history));
+const middleware = applyMiddleware(createPromise(), thunk, createLogger());
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const combinedReducers = combineReducers({
-    ...reducers,
-    router: routerReducer
+	...reducers
 });
 
 const composedMiddleware = composeEnhancers(middleware);
