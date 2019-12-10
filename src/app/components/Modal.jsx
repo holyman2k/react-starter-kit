@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 
 class Modal extends React.Component {
+
     componentDidMount() {
         const { onCancel } = this.props;
         const modal = ReactDOM.findDOMNode(this);
@@ -19,7 +20,7 @@ class Modal extends React.Component {
         }
     }
 
-    componentWillReceiveProps(props) {
+    UNSAFE_componentWillReceiveProps(props) {
         const { show } = props;
         const modal = ReactDOM.findDOMNode(this);
         const isHidden = $(modal).css("display") != "block";
