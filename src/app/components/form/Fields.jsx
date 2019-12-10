@@ -1,5 +1,5 @@
 import React from "react";
-import ReactSelect, { Async } from "react-select";
+import ReactSelect, { Async as async } from "react-select";
 import NumberFormat from "react-number-format";
 import variables from "../../css/variables.scss";
 
