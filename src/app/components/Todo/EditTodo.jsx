@@ -99,7 +99,6 @@ export default withRouter(
 	connect(
 		(store, props) => {
 			const typeList = [
-				{ value: "", label: "-- Select --" },
 				{ value: "work", label: "Work" },
 				{ value: "home", label: "Home" }
 			];

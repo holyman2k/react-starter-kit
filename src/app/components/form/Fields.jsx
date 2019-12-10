@@ -1,6 +1,5 @@
 import React from "react";
-import ReactSelect from "react-select";
-import { Async } from "react-select";
+import ReactSelect, { Async } from "react-select";
 import NumberFormat from "react-number-format";
 
 export const Input = container => {
@@ -84,10 +83,27 @@ export const Select = container => {
 			input.onChange(value ? value.value : null);
 		};
 		const value = options.filter(item => item.value == input.value).pop();
+		const styles = {
+			control: (provided, state) => {
+				console.log("control provided", provided);
+				return {
+					...provided,
+					border: touched && error ? "1px solid #FF0039" : "1px solid #ced4da",
+					borderRadius: 0,
+					color: state.isSelected ? "red" : "blue",
+					boxShadow: "none",
+					"&:hover": { borderColor: touched && error ? "#FF0039" : "#CED4DA" }
+				};
+			},
+			container: (provided, state) => {
+				return { border: 0 };
+			}
+		};
 		return (
 			<Wrapper input={input} meta={{ touched, error, warning }} label={label}>
 				<ReactSelect
-					className={className}
+					isClearable={true}
+					styles={styles}
 					multi={multi}
 					name={input.name}
 					value={value}
@@ -133,7 +149,7 @@ export const FormContainer = ({ children, input, label, meta: { touched, error, 
 		<div class={classNames}>
 			<label htmlFor={input.name}>{label}</label>
 			{children}
-			{touched && ((error && <div class="invalid-feedback">{error}</div>) || (warning && <div class="text-warning">>{warning}</div>))}
+			{touched && ((error && <div class="text-danger">{error}</div>) || (warning && <div class="text-warning">>{warning}</div>))}
 		</div>
 	);
 };
@@ -143,7 +159,7 @@ export const PlainFormContainer = ({ children, meta: { touched, error, warning }
 	return (
 		<div class={classNames}>
 			{children}
-			{touched && ((error && <div class="invalid-feedback">{error}</div>) || (warning && <div class="text-warning">>{warning}</div>))}
+			{touched && ((error && <div class="text-danger">{error}</div>) || (warning && <div class="text-warning">>{warning}</div>))}
 		</div>
 	);
 };
@@ -155,7 +171,6 @@ export const InlineFormContainer = labelSize => {
 		const bodySizeClass = `col-sm-${12 - labelSize} `;
 		const labelSizeClass = `col-sm-${labelSize} col-form-label text-sm-right`;
 		const classNames = ["form-group", "row"];
-		if (touched && error) classNames.push("has-error");
 		return (
 			<div class={classNames.join(" ")}>
 				<label class={labelSizeClass} htmlFor={input.name}>
@@ -163,7 +178,7 @@ export const InlineFormContainer = labelSize => {
 				</label>
 				<div class={bodySizeClass}>
 					{children}
-					{touched && ((error && <div class="invalid-feedback">{error}</div>) || (warning && <div class="text-warning">>{warning}</div>))}
+					{touched && ((error && <div class="text-danger">{error}</div>) || (warning && <div class="text-warning">>{warning}</div>))}
 				</div>
 			</div>
 		);
