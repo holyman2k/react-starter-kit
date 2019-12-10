@@ -1,6 +1,7 @@
 import React from "react";
 import ReactSelect, { Async } from "react-select";
 import NumberFormat from "react-number-format";
+import variables from "../../css/variables.scss";
 
 export const Input = container => {
 	const Wrapper = container;
@@ -85,11 +86,10 @@ export const Select = container => {
 		const styles = {
 			control: (provided, state) => ({
 				...provided,
-				border: touched && error ? "1px solid #FF0039" : "1px solid #ced4da",
+				border: `1px solid ${touched && error ? variables.borderColorInvalid : variables.borderColor}`,
 				borderRadius: 0,
-				color: state.isSelected ? "red" : "blue",
 				boxShadow: "none",
-				"&:hover": { borderColor: touched && error ? "#FF0039" : "#CED4DA" }
+				"&:hover": { borderColor: touched && error ? variables.borderColorInvalid : variables.borderColor }
 			})
 		};
 		return (
@@ -121,11 +121,10 @@ export const AsyncSelect = container => {
 		const styles = {
 			control: (provided, state) => ({
 				...provided,
-				border: touched && error ? "1px solid #FF0039" : "1px solid #ced4da",
+				border: `1px solid ${touched && error ? variables.borderColorInvalid : variables.borderColor}`,
 				borderRadius: 0,
-				color: state.isSelected ? "red" : "blue",
 				boxShadow: "none",
-				"&:hover": { borderColor: touched && error ? "#FF0039" : "#CED4DA" }
+				"&:hover": { borderColor: touched && error ? variables.borderColorInvalid : variables.borderColor }
 			})
 		};
 		return (
