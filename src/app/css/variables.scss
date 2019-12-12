@@ -1,6 +1,10 @@
 @import "~bootswatch/dist/cosmo/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/cosmo/bootswatch";
+
 
 :export {
-    borderColor: #ced4da;
-    borderColorInvalid: #FF0039;
+    borderColor: $input-border-color;
+    borderColorInvalid: $danger;
+    textDanger: $danger;
   }
