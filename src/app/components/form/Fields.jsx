@@ -102,6 +102,7 @@ export const Select = container => {
 					value={value}
 					options={options}
 					autoload={autoload}
+					onBlur={input.onBlur}
 					onChange={value => onChange(value)}
 				/>
 			</Wrapper>
@@ -137,6 +138,7 @@ export const AsyncSelect = container => {
 					simpleValue
 					value={value}
 					autoload={autoload}
+					onBlur={input.onBlur}
 					onChange={value => onChange(value)}
 					loadOptions={loadOptions}
 					type="select"
