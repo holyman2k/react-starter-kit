@@ -40,7 +40,7 @@ class Modal extends React.Component {
 		const Footer = Array.isArray(children) ? children.filter(_ => _.type.name == "Footer").pop() : null;
 
 		return (
-			<div class="modal fade" tabIndex="-1" role="dialog" data-backdrop="static" data-keyboard="true" data-focus="true">
+			<div class="modal fade" tabIndex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-focus="true">
 				<div class={`modal-dialog ${sizeClass}`} role="document">
 					<div class="modal-content">
 						<div class="modal-header">
