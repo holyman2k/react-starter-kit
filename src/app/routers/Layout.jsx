@@ -1,9 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import Loader from "react-loader-advanced";
 import NavBar from "../components/NavBar.jsx";
-import Spinner from "../components/Spinner.jsx";
 import Busy from "../components/Busy.jsx";
 
 const Layout = ({ children }) => {
