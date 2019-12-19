@@ -7,7 +7,6 @@ export const Input = container => {
 	const Wrapper = container;
 	return ({ input, label, meta: { touched, error, warning } }) => {
 		const className = touched && error ? "form-control is-invalid" : "form-control";
-		console.log("label", className, label, touched, error);
 		return (
 			<Wrapper input={input} meta={{ touched, error, warning }} label={label}>
 				<input class={className} {...input} placeholder={label} />
@@ -37,7 +36,6 @@ export const NumberInput = container => {
 					thousandSeparator={true}
 					onValueChange={onValueChange}
 					prefix={prefix}
-					{...input}
 					onBlur={onBlur}
 					onChange={() => {}} // overwrite onChange, data change is handled by onValueChange
 				/>
@@ -56,13 +54,9 @@ export const SimpleSelect = container => {
 			const value = options[event.target.selectedIndex].value;
 			input.onChange(value ? value : null);
 		};
-		const onBlur = event => {
-			const value = options[event.target.selectedIndex].value;
-			input.onBlur(value ? value : null);
-		};
 		return (
 			<Wrapper input={input} meta={{ touched, error, warning }} label={label}>
-				<select class={className} {...input} onChange={onChange} onBlur={onBlur}>
+				<select class={className} {...input} onChange={onChange} onBlur={() => input.onBlur()}>
 					{options.map((option, index) => (
 						<option key={index} value={option.value}>
 							{option.label}
@@ -78,12 +72,11 @@ export const SimpleSelect = container => {
 // value must be a string
 export const Select = container => {
 	const Wrapper = container;
-	return ({ options, input, label, meta: { touched, error, warning }, autoload = true, multi = false }) => {
+	return ({ options, input, label, meta: { touched, error, warning }, isMulti = false }) => {
 		const onChange = value => {
 			input.onChange(value ? value.value : null);
 		};
-		const value = options.filter(item => item.value == input.value).pop();
-		const styles = {
+		const style = {
 			control: (provided, state) => ({
 				...provided,
 				border: `1px solid ${touched && error ? variables.borderColorInvalid : variables.borderColor}`,
@@ -92,18 +85,18 @@ export const Select = container => {
 				"&:hover": { borderColor: touched && error ? variables.borderColorInvalid : variables.borderColor }
 			})
 		};
+		const value = options.filter(item => item.value == input.value);
 		return (
 			<Wrapper input={input} meta={{ touched, error, warning }} label={label}>
 				<ReactSelect
 					isClearable={true}
-					styles={styles}
-					multi={multi}
+					styles={style}
+					isMulti={isMulti}
 					name={input.name}
 					value={value}
 					options={options}
-					autoload={autoload}
-					onBlur={input.onBlur}
 					onChange={value => onChange(value)}
+					onBlur={() => input.onBlur()}
 				/>
 			</Wrapper>
 		);
@@ -118,7 +111,7 @@ export const AsyncSelect = container => {
 		const onChange = value => {
 			input.onChange(value ? value.value : null);
 		};
-		const value = options.filter(item => item.value == input.value).pop();
+		const value = options.filter(item => item.value == input.value)
 		const styles = {
 			control: (provided, state) => ({
 				...provided,
@@ -140,8 +133,8 @@ export const AsyncSelect = container => {
 					autoload={autoload}
 					onBlur={input.onBlur}
 					onChange={value => onChange(value)}
+					onBlur={() => input.onBlur()}
 					loadOptions={loadOptions}
-					type="select"
 				/>
 			</Wrapper>
 		);
