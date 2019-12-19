@@ -10,11 +10,11 @@ const Todo = ({ todoList, onEditTodo }) => {
 			<button class="btn btn-primary mb-2" onClick={() => onEditTodo({})}>
 				<PlusIcon />
 			</button>
-			<table class="table">
+			<table class="table table-hover table-responsive-sm">
 				<thead>
 					<tr>
 						<th scope="col">ID</th>
-						<th scope="col">Name</th>
+						<th scope="col-4">Name</th>
 						<th scope="col">Email</th>
 						<th scope="col">Value</th>
 						<th scope="col"></th>
@@ -22,11 +22,11 @@ const Todo = ({ todoList, onEditTodo }) => {
 				</thead>
 				<tbody>
 					{todoList.map(todo => (
-						<tr key={todo.id}>
-							<th>{todo.id}</th>
-							<td>{todo.task}</td>
-							<td>{todo.email}</td>
-							<td>{todo.type}</td>
+						<tr key={todo.id} onClick={() => onEditTodo(todo)} class="pointer">
+							<th class="align-middle">{todo.id}</th>
+							<td class="align-middle">{todo.task}</td>
+							<td class="align-middle">{todo.email}</td>
+							<td class="align-middle">{todo.type}</td>
 							<td>
 								<button type="button" class="btn btn-link" onClick={() => onEditTodo(todo)}>
 									Edit
