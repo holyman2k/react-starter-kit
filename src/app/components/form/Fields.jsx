@@ -68,8 +68,8 @@ export const SimpleSelect = container => {
 	};
 };
 
-// options [{value:"v", label:"l"}]
-// value must be a string
+// options [{value, label}]
+// value is value or array of values
 export const Select = container => {
 	const Wrapper = container;
 	return ({ options, input, label, meta: { touched, error, warning }, isMulti = false }) => {
@@ -111,8 +111,8 @@ export const Select = container => {
 	};
 };
 
-// options [{value:"v", label:"l"}]
-// value must be a string
+// options [{value, label}]
+// value is value or array of values
 export const AsyncSelect = container => {
 	const Wrapper = container;
 	return ({ loadOptions, input, label, meta: { touched, error, warning }, autoload = true, isMulti = false }) => {
