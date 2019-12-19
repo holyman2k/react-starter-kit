@@ -17,7 +17,7 @@ class Modal extends React.Component {
 			$(modal).off("hidden.bs.modal");
 			$(modal).modal("hide");
 		}
-	}    
+	}
 
 	componentDidUpdate(prevProps) {
 		const modal = ReactDOM.findDOMNode(this);
@@ -34,6 +34,9 @@ class Modal extends React.Component {
 	}
 
 	render() {
+		// update modal height on render
+		const modal = ReactDOM.findDOMNode(this);
+		$(modal).modal("handleUpdate");
 		const { children, title, size = "large" } = this.props;
 		const sizeClass = size == "large" ? "modal-lg" : size == "small" ? "modal-sm" : "";
 		const Body = Array.isArray(children) ? children.filter(_ => _.type.name == "Body").pop() : children;
