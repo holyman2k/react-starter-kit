@@ -74,7 +74,11 @@ export const Select = container => {
 	const Wrapper = container;
 	return ({ options, input, label, meta: { touched, error, warning }, isMulti = false }) => {
 		const onChange = value => {
-			input.onChange(value ? value.value : null);
+			if (isMulti) {
+				input.onChange(value ? value.map(item => item.value) : null);
+			} else {
+				input.onChange(value ? value.value : null);
+			}
 		};
 		const style = {
 			control: (provided, state) => ({
@@ -85,7 +89,11 @@ export const Select = container => {
 				"&:hover": { borderColor: touched && error ? variables.borderColorInvalid : variables.borderColor }
 			})
 		};
-		const value = options.filter(item => item.value == input.value);
+
+		const value = isMulti
+			? options.filter(item => (input.value ? input.value.indexOf(item.value) != -1 : false))
+			: options.filter(item => item.value == input.value);
+
 		return (
 			<Wrapper input={input} meta={{ touched, error, warning }} label={label}>
 				<ReactSelect
@@ -96,7 +104,7 @@ export const Select = container => {
 					value={value}
 					options={options}
 					onChange={value => onChange(value)}
-					onBlur={() => input.onBlur()}
+					onBlur={() => input.onBlur}
 				/>
 			</Wrapper>
 		);
@@ -107,11 +115,10 @@ export const Select = container => {
 // value must be a string
 export const AsyncSelect = container => {
 	const Wrapper = container;
-	return ({ loadOptions, input, label, meta: { touched, error, warning }, autoload = true, multi = false }) => {
+	return ({ loadOptions, input, label, meta: { touched, error, warning }, autoload = true, isMulti = false }) => {
 		const onChange = value => {
 			input.onChange(value ? value.value : null);
 		};
-		const value = options.filter(item => item.value == input.value)
 		const styles = {
 			control: (provided, state) => ({
 				...provided,
@@ -121,14 +128,16 @@ export const AsyncSelect = container => {
 				"&:hover": { borderColor: touched && error ? variables.borderColorInvalid : variables.borderColor }
 			})
 		};
+		const value = isMulti
+			? options.filter(item => (input.value ? input.value.indexOf(item.value) != -1 : false))
+			: options.filter(item => item.value == input.value);
 		return (
 			<Wrapper input={input} meta={{ touched, error, warning }} label={label}>
 				<Async
 					isClearable={true}
 					styles={styles}
-					multi={multi}
+					isMulti={isMulti}
 					name={input.name}
-					simpleValue
 					value={value}
 					autoload={autoload}
 					onBlur={input.onBlur}
