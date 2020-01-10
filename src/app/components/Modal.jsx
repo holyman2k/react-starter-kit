@@ -35,7 +35,7 @@ class Modal extends React.Component {
 
 	render() {
 		// update modal height on render
-		const modal = ReactDOM.findDOMNode(this);
+		let modal;
 		$(modal).modal("handleUpdate");
 		const { children, title, size = "large" } = this.props;
 		const sizeClass = size == "large" ? "modal-lg" : size == "small" ? "modal-sm" : "";
@@ -43,7 +43,7 @@ class Modal extends React.Component {
 		const Footer = Array.isArray(children) ? children.filter(_ => _.type.name == "Footer").pop() : null;
 
 		return (
-			<div class="modal fade" tabIndex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-focus="true">
+			<div ref={node => modal = node} class="modal fade" tabIndex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-focus="true">
 				<div class={`modal-dialog ${sizeClass}`} role="document">
 					<div class="modal-content">
 						<div class="modal-header">
