@@ -5,7 +5,7 @@ import { Field, reduxForm, formValueSelector } from "redux-form";
 import { FieldArray } from "redux-form";
 import { PlusIcon, XIcon } from "react-open-iconic-svg";
 import { Input, NumberInput, Select, DateTime } from "../form/FormControls.jsx";
-import { FormContainer, InlineFormContainer, PlainFormContainer } from "../form/Containers.jsx";
+import { FormContainer, InlineFormContainer, PlainFormContainer } from "../form/FormContainers.jsx";
 import { editTodo, updateTodo, fetchCountries, fetchTodoList } from "../../actions/todoActions";
 import { required, email, minValue, maxValue } from "../form/validators";
 import Modal from "../Modal.jsx";
