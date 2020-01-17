@@ -25,7 +25,7 @@ const EditTodo = ({ show, typeList, countries, submitting, reset, onCancel, hand
 		<Modal show={show} title="Todo" onCancel={onCancel}>
 			<form onSubmit={handleSubmit}>
 				<Field name="task" component={BaseInput} type="text" label="Task" validate={[required]} />
-				<Field name="due" component={BaseDateTime} type="due" label="Due" dateFormat="MMM DD, YYYY" validate={[required]} />
+				<Field name="due" component={BaseDateTime} label="Due" timeZone="America/Los_Angeles" dateFormat="MMM DD, YYYY" validate={[required]} />
 				<Field name="email" component={BaseInput} type="email" label="Email" validate={[required, email]} />
 
 				<hr />

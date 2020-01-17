@@ -2,6 +2,7 @@ import React from "react";
 import ReactSelect, { Async as async } from "react-select";
 import NumberFormat from "react-number-format";
 import ReactDateTime from "react-datetime";
+import moment from 'moment-timezone';	// required to display time zone in react-datetime
 import variables from "../../css/variables.scss";
 import "react-datetime/css/react-datetime.css";
 
@@ -19,7 +20,7 @@ export const Input = container => {
 
 export const DateTime = container => {
 	const Wrapper = container;
-	return ({ input, label, dateFormat = "", timeFormat = "", meta: { touched, error, warning } }) => {
+	return ({ input, label, timeZone, dateFormat = "", timeFormat = "", meta: { touched, error, warning } }) => {
 		const className = touched && error ? "form-control is-invalid" : "form-control";
 		const inputProps = {
 			placeholder: label,
@@ -27,7 +28,15 @@ export const DateTime = container => {
 		};
 		return (
 			<Wrapper input={input} meta={{ touched, error, warning }} label={label}>
-				<ReactDateTime {...input} placeholder={label} dateFormat={dateFormat} timeFormat={timeFormat} inputProps={inputProps} />
+				<ReactDateTime
+					{...input}
+					displayTimeZone={timeZone}
+					placeholder={label}
+					dateFormat={dateFormat}
+					timeFormat={timeFormat}
+					inputProps={inputProps}
+					closeOnSelect={true}
+				/>
 			</Wrapper>
 		);
 	};
