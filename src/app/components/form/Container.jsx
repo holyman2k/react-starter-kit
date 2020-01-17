@@ -1,10 +1,12 @@
 import React from "react";
 
 export const FormContainer = ({ children, input, label, meta: { touched, error, warning } }) => {
-	const classNames = touched && error ? "form-group has-error" : "form-group";
+	const labelClass = touched && error ? "text-danger" : "";
 	return (
-		<div class={classNames}>
-			<label htmlFor={input.name}>{label}</label>
+		<div class="form-group">
+			<label class={labelClass} htmlFor={input.name}>
+				{label}
+			</label>
 			{children}
 			{touched && ((error && <div class="text-danger">{error}</div>) || (warning && <div class="text-warning">>{warning}</div>))}
 		</div>
@@ -12,9 +14,8 @@ export const FormContainer = ({ children, input, label, meta: { touched, error, 
 };
 
 export const PlainFormContainer = ({ children, meta: { touched, error, warning } }) => {
-	const classNames = touched && error ? "has-error mb-2" : "mb-2";
 	return (
-		<div class={classNames}>
+		<div class="mb-2">
 			{children}
 			{touched && ((error && <div class="text-danger">{error}</div>) || (warning && <div class="text-warning">>{warning}</div>))}
 		</div>
@@ -26,11 +27,13 @@ export const PlainFormContainer = ({ children, meta: { touched, error, warning }
 export const InlineFormContainer = labelSize => {
 	return ({ children, input, label, meta: { touched, error, warning } }) => {
 		const bodySizeClass = `col-sm-${12 - labelSize} `;
-		const labelSizeClass = `col-sm-${labelSize} col-form-label text-sm-right`;
-		const classNames = ["form-group", "row"];
+		const labelClass = [`col-sm-${labelSize}`, "col-form-label", "text-sm-right"];
+		if (touched && error) {
+			labelClass.push("text-danger")
+		}
 		return (
-			<div class={classNames.join(" ")}>
-				<label class={labelSizeClass} htmlFor={input.name}>
+			<div class="form-group row">
+				<label class={labelClass.join(" ")} htmlFor={input.name}>
 					{label}
 				</label>
 				<div class={bodySizeClass}>

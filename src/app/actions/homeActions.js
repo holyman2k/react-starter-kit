@@ -14,3 +14,10 @@ export function presentModal(show = true) {
         payload: show
     };
 }
+
+export function dateChange(date) {
+    return {
+        type: "CHANGE_DATE",
+        payload: date
+    };
+}

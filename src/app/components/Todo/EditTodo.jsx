@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { Field, reduxForm, formValueSelector } from "redux-form";
 import { FieldArray } from "redux-form";
 import { PlusIcon, XIcon } from "react-open-iconic-svg";
-import { Input, NumberInput, Select } from "../form/Fields.jsx";
+import { Input, NumberInput, Select, DateTime } from "../form/Fields.jsx";
 import { FormContainer, InlineFormContainer, PlainFormContainer } from "../form/Container.jsx";
 import { editTodo, updateTodo, fetchCountries, fetchTodoList } from "../../actions/todoActions";
 import { required, email, minValue, maxValue } from "../form/validators";
@@ -12,6 +12,7 @@ import Modal from "../Modal.jsx";
 
 const InlineContainer = InlineFormContainer(2);
 const BaseInput = Input(FormContainer);
+const BaseDateTime = DateTime(FormContainer);
 const FormNumberInput = NumberInput(InlineContainer);
 const FormSelect = Select(InlineContainer);
 const PlainFormInput = Input(PlainFormContainer);
@@ -24,7 +25,9 @@ const EditTodo = ({ show, typeList, countries, submitting, reset, onCancel, hand
 		<Modal show={show} title="Todo" onCancel={onCancel}>
 			<form onSubmit={handleSubmit}>
 				<Field name="task" component={BaseInput} type="text" label="Task" validate={[required]} />
+				<Field name="due" component={BaseDateTime} type="due" label="Due" dateFormat="MMM DD, YYYY" validate={[required]} />
 				<Field name="email" component={BaseInput} type="email" label="Email" validate={[required, email]} />
+
 				<hr />
 				<Field
 					name="hour"
@@ -79,9 +82,6 @@ const EditTodo = ({ show, typeList, countries, submitting, reset, onCancel, hand
 				<p class="text-right">
 					<button class="btn btn-primary mr-1" type="submit" disabled={submitting}>
 						Save
-					</button>
-					<button class="btn btn-secondary" type="reset" disabled={submitting} onClick={reset}>
-						Reset
 					</button>
 				</p>
 			</form>
