@@ -2,15 +2,11 @@ import React from "react";
 import Spinner from "./Spinner.jsx";
 
 export default ({ show }) => {
-	if (!show) {
-		return null;
-	}
+	if (!show) return null;
 	return (
-		<div class="Loader__background">
-			<div class="Loader__foreground">
-				<div class="Loader__message">
-					<Spinner />
-				</div>
+		<div class="loader-background">
+			<div class="loader-message">
+				<Spinner />
 			</div>
 		</div>
 	);
