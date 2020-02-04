@@ -23,7 +23,6 @@ export const PlainFormContainer = ({ children, meta: { touched, error, warning }
 };
 
 /// labeSize need to be between 1 to 11 as according to bootstrap column
-/// margin need to be between 1 to 5 as according to bootstrap column
 export const InlineFormContainer = labelSize => {
 	return ({ children, input, label, meta: { touched, error, warning } }) => {
 		const bodySizeClass = `col-sm-${12 - labelSize} `;
