@@ -45,7 +45,6 @@
     "react": "^16.12.0",
     "react-datetime": "^2.16.3",
     "react-dom": "^16.12.0",
-    "react-loader": "^2.4.7",
     "react-number-format": "^4.3.1",
     "react-open-iconic-svg": "^3.0.1",
     "react-redux": "^7.1.3",
