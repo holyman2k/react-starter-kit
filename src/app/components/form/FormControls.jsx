@@ -2,7 +2,7 @@ import React from "react";
 import ReactSelect, { Async as async } from "react-select";
 import NumberFormat from "react-number-format";
 import ReactDateTime from "react-datetime";
-import moment from 'moment-timezone';	// required to display time zone in react-datetime
+import moment from "moment-timezone"; // required to display time zone in react-datetime
 import variables from "../../css/variables.scss";
 import "react-datetime/css/react-datetime.css";
 
@@ -104,6 +104,7 @@ export const Select = container => {
 			if (isMulti) {
 				input.onChange(value ? value.map(item => item.value) : null);
 			} else {
+				console.log("update change", label, value.value)
 				input.onChange(value ? value.value : null);
 			}
 		};
@@ -131,7 +132,7 @@ export const Select = container => {
 					value={value}
 					options={options}
 					onChange={value => onChange(value)}
-					onBlur={input.onBlur}
+					onBlur={() => input.onBlur()}
 				/>
 			</Wrapper>
 		);
