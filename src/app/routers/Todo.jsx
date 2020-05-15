@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { PlusIcon } from "react-open-iconic-svg";
-import { editTodo } from "../actions/todoActions";
+import { editTodo, fetchTodoList } from "../actions/todoActions";
 import EditTodo from "../components/Todo/EditTodo.jsx";
 
 const Todo = ({ todoList, onEditTodo }) => {
@@ -21,7 +21,7 @@ const Todo = ({ todoList, onEditTodo }) => {
 					</tr>
 				</thead>
 				<tbody>
-					{todoList.map(todo => (
+					{todoList.map((todo) => (
 						<tr key={todo.id} onClick={() => onEditTodo(todo)} class="pointer">
 							<th class="align-middle">{todo.id}</th>
 							<td class="align-middle">{todo.task}</td>
@@ -44,14 +44,17 @@ const Todo = ({ todoList, onEditTodo }) => {
 export default connect(
 	(store, props) => {
 		return {
-			todoList: store.todo.todoList
+			todoList: store.todo.todoList,
 		};
 	},
 	(dispatch, props) => {
+		setTimeout(() => {
+			dispatch(fetchTodoList());
+		});
 		return {
-			onEditTodo: todo => {
+			onEditTodo: (todo) => {
 				dispatch(editTodo(todo));
-			}
+			},
 		};
 	}
 )(Todo);
